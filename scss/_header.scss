@@ -1,0 +1,304 @@
+//===шапка=========================================================
+body._lock {
+	overflow: hidden;
+}
+
+.header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 11;
+	background-color: $s;
+
+	&__container {
+		display: flex;
+		align-items: center;
+		min-height: 80px;
+		@include adaptiv-value("column-gap", 18, 16, 1);
+		padding-top: 5px;
+		padding-bottom: 5px;
+		z-index: 55;
+
+	}
+
+	&__logo {
+		position: relative;
+		z-index: 5;
+		color: $a;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		column-gap: 7px;
+		font-weight: 700;
+		font-size: 24px;
+		line-height: 32px;
+		transition: all $tr ease 0s;
+
+		span {
+			display: block;
+			position: relative;
+		}
+
+		img {
+
+			transition: all $tr ease 0s;
+			height: 36px;
+			width: 36px;
+		}
+
+		&:hover {
+			&:hover img {
+				transform: translateY(-6px) rotate(-20deg) scale(1.1);
+			}
+
+			// filter: drop-shadow(0 0 10px #ffffffd7);
+		}
+	}
+
+	&__menu {
+		flex: 1 1 auto;
+	}
+
+	&__login-button {
+		display: flex;
+		align-items: center;
+		column-gap: 8px;
+	}
+
+	&__button {
+		z-index: 5;
+		flex: 0 0 auto;
+		// background-color: $d;
+		// &::before {
+		// 	background-color: #fffb00;
+		// }
+	}
+
+	&__login {
+		z-index: 5;
+		flex: 0 0 auto;
+		display: block;
+		font-weight: 600;
+		@include adaptiv-value("font-size", 16, 14, 1);
+		line-height: 22px;
+		color: $a;
+		padding: 4px 14px;
+		position: relative;
+		transition: all $tr ease 0s;
+
+		&:hover {
+			color: $d;
+		}
+
+		&::after {
+			position: absolute;
+			content: "";
+			height: 3.4px;
+			background-color: $d;
+			bottom: 0;
+			left: 0%;
+			width: 0;
+			transition: all $tr;
+			border-radius: 2px;
+		}
+
+		&:hover::after {
+			left: 0;
+			width: 100%;
+		}
+	}
+}
+
+.menu {
+
+	&__icon {
+		display: none;
+	}
+
+	// &__body {}
+
+	&__list {
+		// display: flex;
+		flex-wrap: wrap;
+		justify-content: end;
+		// @include adaptiv-value("column-gap", 14, 9, 1);
+		column-gap: 14px;
+		row-gap: 3px;
+	}
+
+	// &__item {}
+
+
+	&__link {
+		display: block;
+		font-weight: 600;
+
+		@include adaptiv-value("font-size", 16, 14, 1);
+		// font-size: 16px;
+		line-height: 22px;
+		color: $a;
+		padding: 4px 14px;
+		position: relative;
+		transition: all $tr ease 0s;
+
+		&:hover {
+			color: $d;
+		}
+
+		&::after {
+			position: absolute;
+			content: "";
+			height: 3.4px;
+			background-color: $d;
+			bottom: 0;
+			left: 0%;
+			width: 0;
+			transition: all $tr;
+			border-radius: 2px;
+		}
+
+		&:hover::after {
+			left: 0;
+			width: 100%;
+		}
+	}
+}
+
+@media (max-width: 767.98px) {
+
+	.menu__icon {
+		z-index: 5;
+		display: block;
+		position: relative;
+		flex: 0 0 30px;
+		height: 24px;
+	}
+
+	.menu__icon span,
+	.menu__icon::before,
+	.menu__icon::after {
+		left: 0;
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		transition: all $tr ease 0s;
+		background-color: $a;
+		height: 4px;
+		border-radius: 10px;
+
+	}
+
+	.menu__icon::before,
+	.menu__icon::after {
+		content: "";
+	}
+
+	.menu__icon::before {
+		top: 0;
+	}
+
+	.menu__icon::after {
+		bottom: 0;
+	}
+
+	.menu__icon span {
+		top: calc(50% - 2px);
+	}
+
+	.menu__icon._active span {
+		opacity: 0;
+	}
+
+	.menu__icon._active::before {
+		top: calc(50% - 2px);
+		transform: rotate(-45deg);
+	}
+
+	.menu__icon._active::after {
+		bottom: calc(50% - 2px);
+		transform: rotate(45deg);
+	}
+
+	.menu__body {
+		position: fixed;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		padding: 100px 15px 30px 15px;
+		transition: all $tr ease 0s;
+		background-color: $a;
+		overflow: auto;
+	}
+
+	.menu__body._active {
+		left: 0;
+	}
+
+	.menu__body::before {
+		content: "";
+		position: fixed;
+		width: 100%;
+		top: 0;
+		left: 0;
+		min-height: 80px;
+		background-color: $s;
+		z-index: 2;
+	}
+
+	.menu__list {
+
+		display: flex;
+		row-gap: 26px;
+		flex-direction: column;
+	}
+
+	.menu__link {
+		font-size: 28px;
+		color: $s;
+		display: flex;
+		justify-content: end;
+		padding-bottom: 12px;
+
+		&:hover {
+			color: $d;
+		}
+
+		&::after {
+			background-color: $d;
+			height: 4px;
+		}
+	}
+}
+
+@media (max-width: 767.98px) {
+	.header__container {
+		min-height: 70px;
+	}
+
+	.menu__body::before {
+		min-height: 70px;
+	}
+}
+
+@media (max-width: 419px) {
+	.header__logo {
+		span {
+			display: none;
+		}
+	}
+}
+
+@media (max-width: 375px) {
+	.header__login {
+		padding: 0;
+	}
+}
+
+@media (min-width: 767.98px) {
+	.menu__list {
+		display: flex;
+		align-items: center;
+	}
+}

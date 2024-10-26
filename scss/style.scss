@@ -1,0 +1,229 @@
+//===обнулення=========================================================
+@import "_zeroing";
+
+//===шрифт=========================================================
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap");
+
+//===міксини=========================================================
+//===адаптивна-властивісь=========================================================
+// $maxWidth: 1600;
+$maxwidthContainer: 1600;
+
+// $maxwidthContainer: 1326;
+@mixin adaptiv-value($property, $startSize, $minSize, $type) {
+	$addSize: $startSize - $minSize;
+
+	@if $type==1 {
+		#{$property}: $startSize + px;
+
+		@media (max-width: #{$maxwidthContainer + px}) {
+			#{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxwidthContainer - 320}));
+		}
+	}
+}
+
+//---підключення--------------------------------
+// @include adaptiv-value("padding", 50, 20, 1);
+
+//===перемінні=========================================================
+$tr: 0.5s;
+$br: 12px;
+
+// -----------------
+$a: #ffffff;
+$s: #000000;
+$d: #ff8800;
+// $d: #ffa600;
+
+// $d: #ffbb00;
+
+
+// -----------------
+
+//===базові-стилі=========================================================
+body {
+	font-family: "Poppins";
+	color: $s;
+	background-color: $a;
+	// min-height: 3000px;
+}
+
+//===обгортка=========================================================
+.wrapper {
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+	overflow: clip;
+
+	.page {
+		flex: 1 1 auto;
+		// &__main {}
+		// &__stats {}
+		// &__services {}
+		// &__clouds {}
+		// &__about-us {}
+		// &__plans {}
+	}
+}
+
+//===сонтейнер=========================================================
+[class*="__container"] {
+	max-width: 1110px;
+	margin: 0 auto;
+	padding: 0px 15px;
+	// 1080 снт
+	// 1440px пол
+}
+
+//===готові-блоки=========================================================
+.img {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+
+	img {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		object-fit: cover;
+	}
+}
+
+.button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: fit-content;
+	position: relative;
+	// overflow: hidden;
+	@include adaptiv-value("padding-top", 12, 8, 1);
+	@include adaptiv-value("padding-bottom", 12, 8, 1);
+	@include adaptiv-value("padding-left", 18, 14, 1);
+	@include adaptiv-value("padding-right", 18, 14, 1);
+	// padding: 12px 18px;
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 20px;
+	letter-spacing: -0.6%;
+	// background-color: $d;
+	// color: $s;
+	border-radius: 6px;
+	z-index: 5;
+	transition: all $tr ease 0s;
+
+	// &:hover {
+	// 	color: $a;
+	// }
+
+	&::before {
+		content: "";
+		position: absolute;
+		border-radius: 4px;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		transition: all $tr ease 0s;
+	}
+
+	&::before {
+		height: 0;
+	}
+
+	&:hover::before {
+		top: unset;
+		bottom: 0;
+		height: 100%;
+	}
+}
+
+.button--dark {
+	background-color: $a;
+	color: $s;
+
+	&:hover {
+		color: $a;
+	}
+
+	&::before {
+		background-color: $d;
+	}
+}
+
+.button--white {
+	background-color: $s;
+	color: $a;
+
+	&:hover {
+		color: $s;
+	}
+
+	&::before {
+		background-color: $d;
+	}
+}
+
+
+
+
+.title {
+	font-weight: 600;
+
+	font-size: 48px;
+	line-height: 64px;
+	letter-spacing: -1%;
+}
+
+.main--title {
+	font-weight: 700;
+	font-size: 52px;
+}
+
+.small--title {
+	font-weight: 600;
+	font-size: 36px;
+	line-height: 44px;
+	letter-spacing: -2.2%;
+}
+
+
+.text {
+	// font-weight: 400;
+	// font-size: 16px;
+	line-height: 24px;
+	letter-spacing: -1.1%;
+	// color: #828282;
+}
+
+.sub-title {
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 28px;
+	letter-spacing: -1.7%;
+}
+
+.sub-text {
+	// 600
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 20px;
+	letter-spacing: -0.6%;
+}
+
+//===підключення-файлів==================================================
+//===шапка==========================================================
+@import "_header";
+
+//===головна==========================================================
+@import "_main";
+
+//===підписка==========================================================
+@import "_subscription";
+
+//===підвал==========================================================
+@import "_footer";
